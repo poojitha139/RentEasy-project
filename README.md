@@ -47,21 +47,7 @@ Watch full walkthrough here:
 
 ## 📁 Project Structure
 
-HouseRent/
-backend/
-models/
-routes/
-server.js
-frontend/
-public/
-src/
-pages/
-components/
-App.js, index.js
-screenshots/
-*.png (all demo screenshots)
-.env
-README.md
+<pre> ``` HouseRent/ ├── backend/ │ ├── models/ │ ├── routes/ │ └── server.js ├── frontend/ │ ├── public/ │ ├── src/ │ ├── pages/ │ ├── components/ │ └── App.js, index.js ├── screenshots/ │ └── *.png (all demo screenshots) ├── .env └── README.md ``` </pre>
 
 
 
