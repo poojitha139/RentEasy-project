@@ -13,19 +13,20 @@ A MERN stack house rental web application where renters can browse and book rent
 ## 📷 Screenshots
 
 ### 🔐 Login Page
-![Login Page](./frontend/screenshots/login-page.png)
+![Login Page](./ProjectFiles/frontend/screenshots/login-page.png)
 
 ### 📝 Renter Dashboard
-![Renter Dashboard](./frontend/screenshots/renter-page.png)
+![Renter Dashboard](./ProjectFiles/frontend/screenshots/renter-page.png)
 
 ### 🏘️ Owner Dashboard
-![Owner Dashboard](./frontend/screenshots/owner-page.png)
+![Owner Dashboard](./ProjectFiles/frontend/screenshots/owner-page.png)
 
 ### ➕ Add Property Page
-![Add Property](./frontend/screenshots/add-property.png)
+![Add Property](./ProjectFiles/frontend/screenshots/add-property.png)
 
 ### ⚙️ Admin Dashboard
-![Admin Page](./frontend/screenshots/admin-page.png)
+![Admin Page](./ProjectFiles/frontend/screenshots/admin-page.png)
+
 
 
 ## 🎬 Demo Video
