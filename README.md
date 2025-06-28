@@ -31,7 +31,7 @@ A MERN stack house rental web application where renters can browse and book rent
 ## 🎬 Demo Video
 
 Watch full walkthrough here:  
-📺 🎥 [Watch Project Demo on Google Drive](https://drive.google.com/file/d/1ArNKteslMWdjCa-pPIO6byxF7CZCUU6r/view?usp=drive_link)
+📺 🎥 [Watch Project Demo on Google Drive](https://drive.google.com/file/d/1RsTuKI9M3080rFRvhUONWe28hnMm8h-Y/view?usp=sharing)
 
 
 
@@ -56,7 +56,7 @@ Watch full walkthrough here:
 
    *Shiva Reddy and Team*
 
-    🎥 **Watch Demo on [Google Drive](https://drive.google.com/file/d/1ArNKteslMWdjCa-pPIO6byxF7CZCUU6r/view?usp=drive_link)**
+    🎥 **Watch Demo on [Google Drive](https://drive.google.com/file/d/1RsTuKI9M3080rFRvhUONWe28hnMm8h-Y/view?usp=sharing)**
 
 
 
