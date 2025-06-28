@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+.dashboard-bg-wrapper {
+  background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+  min-height: 100vh;
+  padding: 30px 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.dashboard-bg-wrapper.sidebar-open {
+  margin-left: 200px;
+}
+
+.top-header {
+  background-color: #1976d2;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
+}
+
+.top-header .brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-header .hamburger {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.top-header .owner-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.owner-sidebar {
+  width: 200px;
+  background-color: #2196f3;
+  color: white;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100% - 60px);
+  padding: 20px 10px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.owner-sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: #42a5f5;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidebar-icon:hover {
+  background-color: #64b5f6;
+}
+
+.dashboard-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: #003566;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.property-card {
+  margin-bottom: 20px;
+}
+
+.animated-add-btn {
+  background: linear-gradient(135deg, #f44336, #e91e63);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.animated-add-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff6f61, #ff4081);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  .dashboard-bg-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+
+  .top-header .brand span {
+    font-size: 1.2rem;
+  }
+
+  .sidebar-icon span {
+    display: none;
+  }
+
+  .top-header .owner-name {
+    font-size: 0.9rem;
+  }
+
+  .owner-sidebar {
+    width: 160px;
+  }
+}
+
+.owner-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.highlight-name {
+  font-weight: bold;
+  background: linear-gradient(to right, #00c6ff, #00e6ac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  margin: 8px auto 0;
+  border-bottom: 3px solid #00b4d8;
+  transition: width 0.3s ease;
+}
+
+.dashboard-title:hover::after {
+  width: 120px;
+}
+
+.dashboard-content {
+  padding-top: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
