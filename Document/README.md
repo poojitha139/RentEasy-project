@@ -1,83 +1,11 @@
-# 🏠 RentEasy — Finding Your Perfect Rental Home
+# 📂 Project Documentation - RentEasy
 
-A MERN stack house rental web application where renters can browse and book rental properties, and owners can list and manage their properties.
+Welcome to the documentation section of the RentEasy project. This folder contains all project-related planning, design, and analysis materials.
 
----
+## 📁 Folder Structure:
 
-## 🚀 Features
-
-### 👤 User Roles:
-- **Renter**: Register, login, search properties, view details, book, and track booking status.
-- **Owner**: Register (admin approval required), login, add/update/delete property listings, approve or reject bookings.
-- **Admin**: Manage users, approve owners, maintain platform rules.
-
----
-
-## 📷 Screenshots
-
-### 🔐 Login Page
-![Login Page](../ProjectFiles/frontend/screenshots/login-page.png)
-
-### 📝 Renter Dashboard
-![Renter Dashboard](../ProjectFiles/frontend/screenshots/renter-page.png)
-
-### 🏘️ Owner Dashboard
-![Owner Dashboard](../ProjectFiles/frontend/screenshots/owner-page.png)
-
-### ➕ Add Property Page
-![Add Property](../ProjectFiles/frontend/screenshots/add-property.png)
-
-### ⚙️ Admin Dashboard
-![Admin Page](../ProjectFiles/frontend/screenshots/admin-page.png)
-
-
----
-
-## 🎬 Demo Video
-
-📺 🎥 [Watch Project Demo on Google Drive](https://drive.google.com/file/d/1RsTuKI9M3080rFRvhUONWe28hnMm8h-Y/view?usp=sharing)
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React.js, Bootstrap, Material UI, Axios  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB, Mongoose  
-- **Authentication**: JWT  
-- **File Uploads**: Multer  
-- **Other**: Moment.js, Ant Design, React-Router
-
----
-
-## 📁 Project Structure
-
-HouseRent/
-├── Documents/
-│ └── README.md
-├── VideoDemo/
-│ └── README.md
-├── ProjectFiles/
-│ ├── backend/
-│ └── frontend/
-├── .gitignore
-└── README.md
-
-
-
----
-
-## 🧑‍💻 Developed By
-
-*Shiva Reddy and Team*
-
-📩 Email: 234g1a33g3@srit.ac.in  
-🆔 College ID: 234G1A33G3
-
----
-
-## 📌 Notes
-
-- Owner accounts need admin approval.
-- Protected routes implemented via JWT middleware.
-- Responsive UI across devices.
+- **Ideation Phase** - Contains problem statements, brainstorming docs.
+- **Requirement Analysis** - Functional and non-functional requirement docs.
+- **Project Planning Phase** - Timelines, Gantt charts, work breakdown structure.
+- **Project Design Phase** - Includes UML, ER diagrams, and database design.
+- **Performance Testing** - JMeter or manual test reports.

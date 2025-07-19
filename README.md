@@ -48,7 +48,7 @@ Watch full walkthrough here:
 
 ## 📁 Project Structure
 
-<pre> ``` HouseRent/ ├── backend/ │ ├── models/ │ ├── routes/ │ └── server.js ├── frontend/ │ ├── public/ │ ├── src/ │ ├── pages/ │ ├── components/ │ └── App.js, index.js ├── screenshots/ │ └── *.png (all demo screenshots) ├── .env └── README.md ``` </pre>
+<pre lang="markdown">```bash HouseRent/ ├── backend/ │ ├── models/ │ ├── routes/ │ └── server.js ├── frontend/ │ ├── public/ │ ├── src/ │ ├── pages/ │ ├── components/ │ └── App.js, index.js ├── screenshots/ │ └── *.png (all demo screenshots) ├── .env └── README.md ```</pre>
 
 
 
