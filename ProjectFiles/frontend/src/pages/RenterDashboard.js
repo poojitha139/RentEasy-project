@@ -28,12 +28,12 @@ const RenterDashboard = () => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res1 = await axios.get("http://localhost:5000/api/properties/available", {
+        const res1 = await axios.get("http://localhost:3000/api/properties/available", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProperties(res1.data);
 
-        const res2 = await axios.get("http://localhost:5000/api/bookings/my-bookings", {
+        const res2 = await axios.get("http://localhost:3000/api/bookings/my-bookings", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -75,7 +75,7 @@ const removeNotification = async (id) => {
   try {
     const token = localStorage.getItem("token");
    await axios.put(
-  `http://localhost:5000/api/bookings/update-booking/${id}`,
+  `http://localhost:3000/api/bookings/update-booking/${id}`,
   { dismissed: true },
   { headers: { Authorization: `Bearer ${token}` } }
 );
@@ -145,7 +145,7 @@ const removeNotification = async (id) => {
                 prop.prop.images?.[0]
                   ? prop.prop.images[0].startsWith("http")
                     ? prop.prop.images[0]
-                    : `http://localhost:5000${prop.prop.images[0]}`
+                    : `http://localhost:3000${prop.prop.images[0]}`
                   : "https://source.unsplash.com/400x300/?house"
               }
               className="card-img-top"
@@ -202,7 +202,7 @@ const removeNotification = async (id) => {
                   try {
                     const token = localStorage.getItem("token");
                     await axios.post(
-                      "http://localhost:5000/api/bookings/book",
+                      "http://localhost:3000/api/bookings/book",
                       {
                         propertyId: selectedProperty._id,
                         ownerId: selectedProperty.userId,

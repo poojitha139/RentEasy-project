@@ -13,7 +13,7 @@ const MyBookings = () => {
 
     const fetchBookings = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/bookings/my-bookings", {
+        const response = await axios.get("http://localhost:3000/api/bookings/my-bookings", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

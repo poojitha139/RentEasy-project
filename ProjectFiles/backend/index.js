@@ -27,7 +27,7 @@ app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", adminRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server runing on http://localhost:${PORT}`);
 });

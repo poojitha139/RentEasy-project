@@ -37,13 +37,13 @@ const OwnerDashboard = () => {
 
   useEffect(() => {
     fetchBookings();
-    const interval = setInterval(fetchBookings, 5000);
+    const interval = setInterval(fetchBookings, 3000);
     return () => clearInterval(interval);
   }, []);
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/bookings/owner-bookings", {
+      const res = await axios.get("http://localhost:3000/api/bookings/owner-bookings", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -62,7 +62,7 @@ const OwnerDashboard = () => {
   useEffect(() => {
     const fetchMyProps = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/properties/my-properties", {
+        const res = await axios.get("http://localhost:3000/api/properties/my-properties", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMyProperties(res.data);
@@ -78,7 +78,7 @@ const OwnerDashboard = () => {
     Object.entries(formData).forEach(([key, value]) => data.append(key, value));
 
     try {
-      const res = await axios.post("http://localhost:5000/api/properties/add", data, {
+      const res = await axios.post("http://localhost:3000/api/properties/add", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -104,7 +104,7 @@ const OwnerDashboard = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this property?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/properties/delete/${id}`, {
+      await axios.delete(`http://localhost:3000/api/properties/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMyProperties((prev) => prev.filter((prop) => prop._id !== id));
@@ -117,7 +117,7 @@ const OwnerDashboard = () => {
   const handleBookingAction = async (id, action) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/update-booking/${id}`,
+        `http://localhost:3000/api/bookings/update-booking/${id}`,
         { status: action },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -130,7 +130,7 @@ const OwnerDashboard = () => {
   const dismissNotification = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/update-booking/${id}`,
+        `http://localhost:3000/api/bookings/update-booking/${id}`,
         { dismissed: true },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -164,7 +164,7 @@ const openEditModal = (property) => {
 const handleEditSubmit = async () => {
   try {
     await axios.put(
-      `http://localhost:5000/api/properties/update/${editForm.id}`,
+      `http://localhost:3000/api/properties/update/${editForm.id}`,
       editForm,
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -237,7 +237,7 @@ const handleEditSubmit = async () => {
                         prop.prop.images?.[0]
                           ? prop.prop.images[0].startsWith("http")
                             ? prop.prop.images[0]
-                            : `http://localhost:5000${prop.prop.images[0]}`
+                            : `http://localhost:3000${prop.prop.images[0]}`
                           : "https://source.unsplash.com/400x300/?house"
                       }
                       className="card-img-top"

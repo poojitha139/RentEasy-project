@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AuthPages.css";
 import { useNavigate } from "react-router-dom";
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "http://localhost:3000/api/auth";
 
 const AuthPages = () => {
   const navigate = useNavigate();

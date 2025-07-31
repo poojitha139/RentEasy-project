@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/admin/users", {
+      const res = await axios.get("http://localhost:3000/api/admin/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/admin/approve-owner/${userId}`,
+        `http://localhost:3000/api/admin/approve-owner/${userId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
