@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Container,
   Card,
@@ -31,17 +31,14 @@ const OwnerDashboard = () => {
 
   const [notifications, setNotifications] = useState([]);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [editForm, setEditForm] = useState(null);
 
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username") || "Owner";
 
-  useEffect(() => {
-    fetchBookings();
-    const interval = setInterval(fetchBookings, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const fetchBookings = async () => {
+  // ✅ Fixed: fetchBookings wrapped with useCallback
+  const fetchBookings = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/bookings/owner-bookings", {
         headers: { Authorization: `Bearer ${token}` },
@@ -57,7 +54,13 @@ const OwnerDashboard = () => {
     } catch (err) {
       console.error("❌ Error fetching owner bookings", err);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchBookings();
+    const interval = setInterval(fetchBookings, 3000);
+    return () => clearInterval(interval);
+  }, [fetchBookings]);
 
   useEffect(() => {
     const fetchMyProps = async () => {
@@ -71,7 +74,7 @@ const OwnerDashboard = () => {
       }
     };
     fetchMyProps();
-  }, []);
+  }, [token]);
 
   const handleAddProperty = async () => {
     const data = new FormData();
@@ -146,49 +149,44 @@ const OwnerDashboard = () => {
     window.location.href = "/";
   };
 
-  const [editModalShow, setEditModalShow] = useState(false);
-const [editForm, setEditForm] = useState(null);
+  const openEditModal = (property) => {
+    setEditForm({
+      id: property._id,
+      Type: property.prop.Type,
+      Address: property.prop.Address,
+      Amt: property.prop.Amt,
+      ownerContact: property.prop.ownerContact,
+      addInfo: property.prop.addInfo,
+    });
+    setEditModalShow(true);
+  };
 
-const openEditModal = (property) => {
-  setEditForm({
-    id: property._id,
-    Type: property.prop.Type,
-    Address: property.prop.Address,
-    Amt: property.prop.Amt,
-    ownerContact: property.prop.ownerContact,
-    addInfo: property.prop.addInfo,
-  });
-  setEditModalShow(true);
-};
-
-const handleEditSubmit = async () => {
-  try {
-    await axios.put(
-      `http://localhost:3000/api/properties/update/${editForm.id}`,
-      editForm,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    setMyProperties((prev) =>
-      prev.map((prop) =>
-        prop._id === editForm.id
-          ? {
-              ...prop,
-              prop: {
-                ...prop.prop,
-                ...editForm,
-              },
-            }
-          : prop
-      )
-    );
-    setEditModalShow(false);
-  } catch (err) {
-    console.error("❌ Failed to update property", err);
-    alert("Update failed");
-  }
-};
-
-
+  const handleEditSubmit = async () => {
+    try {
+      await axios.put(
+        `http://localhost:3000/api/properties/update/${editForm.id}`,
+        editForm,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setMyProperties((prev) =>
+        prev.map((prop) =>
+          prop._id === editForm.id
+            ? {
+                ...prop,
+                prop: {
+                  ...prop.prop,
+                  ...editForm,
+                },
+              }
+            : prop
+        )
+      );
+      setEditModalShow(false);
+    } catch (err) {
+      console.error("❌ Failed to update property", err);
+      alert("Update failed");
+    }
+  };
 
   return (
     <>
@@ -198,10 +196,9 @@ const handleEditSubmit = async () => {
           <GiHamburgerMenu className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)} />
           <span>🏠 RentEasy</span>
         </div>
-       <div className="owner-name">
-  Welcome, <span className="highlight-name">{username}</span>👋
-</div>
-
+        <div className="owner-name">
+          Welcome, <span className="highlight-name">{username}</span>👋
+        </div>
       </div>
 
       {/* Sidebar */}
@@ -217,15 +214,12 @@ const handleEditSubmit = async () => {
         </div>
       </div>
 
-      {/* Main Dashboard */}
+      {/* Dashboard */}
       <div className={`dashboard-bg-wrapper ${sidebarOpen ? "sidebar-open" : ""}`}>
-
         <div className="dashboard-content">
-       <Container className="text-center mb-4">
-  <h2 className="dashboard-title">Your Properties</h2>
-</Container>
-
-
+          <Container className="text-center mb-4">
+            <h2 className="dashboard-title">Your Properties</h2>
+          </Container>
           <Container>
             <Row>
               {myProperties.map((prop) => (
@@ -240,18 +234,16 @@ const handleEditSubmit = async () => {
                             : `http://localhost:3000${prop.prop.images[0]}`
                           : "https://source.unsplash.com/400x300/?house"
                       }
-                      className="card-img-top"
                     />
-                <Card.Body>
-  <Card.Title>{prop.prop.Type}</Card.Title>
-  <Card.Text>₹{prop.prop.Amt} / month</Card.Text>
-  <Card.Text>📍 {prop.prop.Address}</Card.Text>
-  <div className="d-flex justify-content-between">
-    <Button size="sm" variant="outline-info" onClick={() => openEditModal(prop)}>✏️ Edit</Button>
-    <Button size="sm" variant="danger" onClick={() => handleDelete(prop._id)}>🗑️ Delete</Button>
-  </div>
-</Card.Body>
-
+                    <Card.Body>
+                      <Card.Title>{prop.prop.Type}</Card.Title>
+                      <Card.Text>₹{prop.prop.Amt} / month</Card.Text>
+                      <Card.Text>📍 {prop.prop.Address}</Card.Text>
+                      <div className="d-flex justify-content-between">
+                        <Button size="sm" variant="outline-info" onClick={() => openEditModal(prop)}>✏️ Edit</Button>
+                        <Button size="sm" variant="danger" onClick={() => handleDelete(prop._id)}>🗑️ Delete</Button>
+                      </div>
+                    </Card.Body>
                   </Card>
                 </Col>
               ))}
@@ -260,41 +252,10 @@ const handleEditSubmit = async () => {
         </div>
       </div>
 
-      {/* Modals (same as before) */}
+      {/* Add Property Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Add Property</Modal.Title>
-          {/* Edit Property Modal */}
-<Modal show={editModalShow} onHide={() => setEditModalShow(false)} centered>
-  <Modal.Header closeButton>
-    <Modal.Title>Edit Property</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <Form>
-      {["Type", "Address", "Amt", "ownerContact", "addInfo"].map((field) => (
-        <Form.Group key={field}>
-          <Form.Label>{field}</Form.Label>
-          <Form.Control
-            type={field === "Amt" ? "number" : "text"}
-            value={editForm?.[field] || ""}
-            onChange={(e) =>
-              setEditForm({ ...editForm, [field]: e.target.value })
-            }
-          />
-        </Form.Group>
-      ))}
-    </Form>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={() => setEditModalShow(false)}>
-      Cancel
-    </Button>
-    <Button variant="primary" onClick={handleEditSubmit}>
-      Save Changes
-    </Button>
-  </Modal.Footer>
-</Modal>
-
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -323,6 +284,34 @@ const handleEditSubmit = async () => {
         </Modal.Footer>
       </Modal>
 
+      {/* Edit Property Modal */}
+      <Modal show={editModalShow} onHide={() => setEditModalShow(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Property</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            {["Type", "Address", "Amt", "ownerContact", "addInfo"].map((field) => (
+              <Form.Group key={field}>
+                <Form.Label>{field}</Form.Label>
+                <Form.Control
+                  type={field === "Amt" ? "number" : "text"}
+                  value={editForm?.[field] || ""}
+                  onChange={(e) =>
+                    setEditForm({ ...editForm, [field]: e.target.value })
+                  }
+                />
+              </Form.Group>
+            ))}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setEditModalShow(false)}>Cancel</Button>
+          <Button variant="primary" onClick={handleEditSubmit}>Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Notifications Modal */}
       <Modal show={showNotificationModal} onHide={() => setShowNotificationModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>📬 Booking Requests</Modal.Title>
@@ -339,21 +328,15 @@ const handleEditSubmit = async () => {
                     <div className="mt-2 d-flex gap-2">
                       {noti.status === "pending" && (
                         <>
-                          <Button size="sm" variant="success" onClick={() => handleBookingAction(noti.id, "approved")}>
-                            Accept
-                          </Button>
-                          <Button size="sm" variant="danger" onClick={() => handleBookingAction(noti.id, "rejected")}>
-                            Reject
-                          </Button>
+                          <Button size="sm" variant="success" onClick={() => handleBookingAction(noti.id, "approved")}>Accept</Button>
+                          <Button size="sm" variant="danger" onClick={() => handleBookingAction(noti.id, "rejected")}>Reject</Button>
                         </>
                       )}
                       {noti.status === "approved" && <Badge bg="success">Approved</Badge>}
                       {noti.status === "rejected" && <Badge bg="danger">Rejected</Badge>}
                     </div>
                   </div>
-                  <Button size="sm" variant="outline-secondary" onClick={() => dismissNotification(noti.id)}>
-                    ✖
-                  </Button>
+                  <Button size="sm" variant="outline-secondary" onClick={() => dismissNotification(noti.id)}>✖</Button>
                 </Card.Body>
               </Card>
             ))
