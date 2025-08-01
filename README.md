@@ -42,7 +42,7 @@ A MERN stack house rental web application where renters can browse and book rent
 ## 🎬 Demo Video
 
 Watch full walkthrough here:  
-📺 🎥 [Watch Project Demo on Google Drive](https://drive.google.com/file/d/1zyDZbBoouzu_I1Pv4qyInK8KL_AerlLy/view?usp=drivesdk)
+📺 🎥 [Watch Project Demo on Google Drive](https://drive.google.com/file/d/1ak-nydztFDZy3x0H9J-RUkmaiUFJJllE/view?usp=drive_link)
 
 
 ## 🛠 Tech Stack
